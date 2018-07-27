@@ -8,20 +8,47 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
-function anagrams(stringA, stringB) {
-    let pattern = /[^A-Za-z0-9_]/g;
-    let newA = stringA.replace(pattern, '').toLowerCase();
-    let newB = stringB.replace(pattern, '').toLowerCase();
-    let charMapA = {};
-    let charMapB = {};
+// function anagrams(stringA, stringB) {
+//     let pattern = /[^A-Za-z0-9_]/g;
+//     // let pattern = /[^\w]/g;
+//     let newA = stringA.replace(pattern, '').toLowerCase();
+//     let newB = stringB.replace(pattern, '').toLowerCase();
+//     let charMapA = {};
+//     let charMapB = {};
 
-    newA.split('').forEach( char => charMapA[char] = charMapA[char] + 1 || 1 );
-    newB.split('').forEach( char => charMapB[char] = charMapB[char] + 1 || 1 );
-
-    console.log('charMapA ', charMapA);
-    console.log('charMapB ', charMapB);
+//     newA.split('').forEach( char => charMapA[char] = charMapA[char] + 1 || 1 );
+//     newB.split('').forEach( char => charMapB[char] = charMapB[char] + 1 || 1 );
     
-    return charMapA === charMapB;
+//     if ( Object.keys(charMapA).length === Object.keys(charMapB).length ) {
+//         console.log('charMapA ', charMapA);
+//         console.log('charMapB ', charMapB);
+//         for (char in charMapA) {
+//             if (charMapA[char] !== charMapB[char]) {
+//                 return false;   
+//             }
+//         }
+//         return true;
+//     }
+// }
+
+let anagrams = (stringA, stringB) => {
+    return cleanString(stringA) === cleanString(stringB);
+}
+
+let cleanString = str => {
+    let cleaned = str.replace(/[^A-Za-z0-9_]/g, '')
+                     .toLowerCase()
+                     .split('')
+                     .sort()
+                     .join();
+    return cleaned;
+}
+
+let buildCharMap = str => {
+    let charMap = {};
+
+    str.split('').forEach( char => charMap[char] = charMap[char] + 1 || 1 );
+    return charMap;
 }
 
 module.exports = anagrams;
