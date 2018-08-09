@@ -52,3 +52,4 @@ let buildCharMap = str => {
 }
 
 module.exports = anagrams;
+
